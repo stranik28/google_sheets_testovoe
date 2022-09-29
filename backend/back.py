@@ -34,9 +34,9 @@ def all():
 @app.get("/summary_rub")
 def recoginze_rub():
     summary = round((session.query(func.sum(Orders.price_rub)).scalar()),2)
-    return summary
+    return {"Summary":summary}
 
 @app.get("/summary_usd")
 def recoginze_usd():
     summary = round((session.query(func.sum(Orders.price_usd)).scalar()),2)
-    return summary
+    return {"Summary":summary}
