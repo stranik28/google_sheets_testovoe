@@ -26,17 +26,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/all")
 def all():
+    '''Вывод всех заказов'''
     all = session.query(Orders).all()
     return all
 
 @app.get("/summary_rub")
 def recoginze_rub():
+    '''Вывод суммы всех заказов в рублях'''
     summary = round((session.query(func.sum(Orders.price_rub)).scalar()),2)
     return {"Summary":summary}
 
 @app.get("/summary_usd")
 def recoginze_usd():
+    '''Вывод суммы всех заказов в долларах'''
     summary = round((session.query(func.sum(Orders.price_usd)).scalar()),2)
     return {"Summary":summary}

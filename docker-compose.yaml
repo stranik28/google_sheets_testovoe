@@ -31,6 +31,16 @@ services:
     depends_on:
       db:
         condition: service_started
+  bot:
+    volumes:
+      - ./tg_bot/:/bot
+    build: tg_bot/.
+    restart: always
+    networks:
+      - testovoe
+    depends_on:
+      db:
+        condition: service_started
 networks:
   testovoe:
     name: testovoe
