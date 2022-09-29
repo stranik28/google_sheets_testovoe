@@ -1,0 +1,7 @@
+SQLAlchemy==1.4.41
+starlette==0.17.1
+psycopg2-binary
+sqlalchemy
+uvicorn
+Pillow==9.2.0
+fastapi==0.75.2

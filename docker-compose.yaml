@@ -1,0 +1,36 @@
+version: '2.0'
+services:
+  db:
+    image: postgres
+    restart: always
+    networks:
+      - testovoe
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env
+  sheets:
+    volumes:
+      - ./sheets_script:/sheets_script
+    build: sheets_script/.
+    restart: always
+    networks:
+      - testovoe
+    depends_on:
+      db:
+        condition: service_started
+  backend:
+    volumes:
+      - ./backend/:/backend
+    build: backend/.
+    restart: always
+    networks:
+      - testovoe
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_started
+networks:
+  testovoe:
+    name: testovoe
